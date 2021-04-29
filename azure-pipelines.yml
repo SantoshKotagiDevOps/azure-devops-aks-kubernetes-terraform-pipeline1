@@ -25,7 +25,7 @@ stages:
           inputs:
             terraformVersion: 'latest'
         - task: TerraformTaskV1@0
-          displayName: 
+          displayName: Terraform Init
           inputs:
             provider: 'azurerm'
             command: 'init'
@@ -35,4 +35,10 @@ stages:
             backendAzureRmStorageAccountName: 'tfstatefilesantosh'
             backendAzureRmContainerName: 'tfstatefiles'
             backendAzureRmKey: 'aks-base.tfstate'
+        - task: TerraformTaskV1@0
+          displayName: Terraform validate
+          inputs:
+            provider: 'azurerm'
+            command: 'validate'
+            workingDirectory: '$(System.DefaultWorkingDirectory)terraform-manifests'
 
